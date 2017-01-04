@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
     public void onClickShareTextButton(View v) {
         // TODO (5) Specify a String you'd like to share
 
+        String sharable = "Shared String";
+
+        shartText(sharable);
+
         // TODO (6) Replace the Toast with shareText, passing in the String from step 5
         Toast.makeText(this, "TODO: Share text when this is clicked", Toast.LENGTH_LONG).show();
     }
@@ -135,6 +139,22 @@ public class MainActivity extends AppCompatActivity {
          * the Intent's constructor. This is simply an alternate way of doing this.
          */
         intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void shartText(String text) {
+        String mimeType = "text/plain";
+        String title = "Learning how to share";
+
+        Intent intent =
+                ShareCompat.IntentBuilder.from(this)
+                .setChooserTitle(title)
+                .setType(mimeType)
+                .setText(text)
+                .getIntent();
+
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
